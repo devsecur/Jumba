@@ -1,0 +1,48 @@
+version: '3'
+services:
+  frontend:
+    build: frontend
+    ports:
+      - "4200:4200"
+  backend:
+    build: backend
+    ports:
+      - "5000:5000"
+  apimgmt:
+    build: apimgmt
+    volumes:
+      - /home/tobias/Dokumente/masagin/apimgmt/config:/etc/api-umbrella
+      - /home/tobias/Dokumente/masagin/apimgmt/db:/opt/api-umbrella/var/db
+      - /home/tobias/Dokumente/masagin/apimgmt/log:/opt/api-umbrella/var/log
+    ports:
+      - "443:443"
+      - "80:80"
+  apimgmt-rest:
+    build: apimgmt-rest
+    volumes:
+      - /home/tobias/Dokumente/masagin/apimgmt-rest:/app
+    environment:
+      - API_KEY=pRGpAwlNMUtR12bbFiSgHOmlVPiOFczgHgm1tFHz
+      - API_ADMIN_KEY=HF5YXVfu44sQ44FRBysy1oZ7F30E7sLvMdDAMuCY
+    depends_on:
+      - apimgmt
+  marvin:
+    build: marvin
+    volumes:
+      - /home/tobias/Dokumente/masagin/marvin:/app
+    entrypoint: python app.py
+    depends_on:
+      - apimgmt
+  redis:
+    image: "redis:alpine"
+  database:
+    restart: always
+    image: mysql:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: 'test_pass' # TODO: Change this
+      MYSQL_USER: 'test'
+      MYSQL_PASS: 'pass'
+    volumes:
+      - my-datavolume:/var/lib/mysql
+volumes:
+  my-datavolume:
