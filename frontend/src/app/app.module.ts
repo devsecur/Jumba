@@ -48,6 +48,7 @@ import {
 
 import { AppRoutingModule }     from './app-routing.module';
 import { ResultsComponent } from './results/results.component';
+import { DatasetComponent } from './dataset/dataset.component';
 
 @NgModule({
   imports: [
@@ -96,7 +97,8 @@ import { ResultsComponent } from './results/results.component';
     AppComponent,
     DashboardComponent,
     MessagesComponent,
-    ResultsComponent
+    ResultsComponent,
+    DatasetComponent
   ],
   bootstrap: [ AppComponent ]
 })
