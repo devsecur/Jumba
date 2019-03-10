@@ -1,0 +1,52 @@
+.fill-remaining-space {
+  /* This fills the remaining space, by using flexbox.
+     Every toolbar row uses a flexbox row layout. */
+  flex: 1 1 auto;
+}
+
+mat-toolbar {
+  z-index: 2;
+  position: relative;
+}
+
+mat-sidenav-container {
+  z-index: 1;
+  height: 100%;
+  width: 100%;
+  margin-top: -64px;
+  padding-top: 64px;
+}
+
+mat-sidenav-content {
+  padding: 10px;
+}
+
+.nav-list-item {
+  padding-left: 10px;
+}
+
+mat-sidenav {
+  padding-top: 64px;
+}
+
+#logo {
+  height: 32px;
+  animation-name: rotate;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+  transform: scale(-1, 1)
+  //filter: invert(100%);
+}
+
+@keyframes rotate {
+    0% {
+      transform: rotate(0deg) scale(1);
+    }
+    50% {
+      transform: rotate(180deg) scale(0.7);
+    }
+    100% {
+      transform: rotate(360deg) scale(1);
+    }
+}

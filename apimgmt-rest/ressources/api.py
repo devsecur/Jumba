@@ -1,8 +1,8 @@
 from flask_restful import Resource
-from common.utils import get_apis
-from flask import Flask, jsonify
+from common.utils import get_apis, pagination
 
 class APIs(Resource):
+    @pagination
     def get(self):
         return get_apis()
 
