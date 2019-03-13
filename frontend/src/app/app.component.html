@@ -1,6 +1,6 @@
-<mat-toolbar color="primary">
+<mat-toolbar #toolbar color="primary" [ngClass]="{'shrink-toolbar': shrinkToolbar}">
   <span class="fill-remaining-space">
-    <button mat-icon-button (click)="sidenav.toggle()">
+    <button mat-icon-button (click)="toggle()">
       <img src="assets/favicon.png" id="logo">
     </button>
   </span>

@@ -12,21 +12,25 @@ services:
     command: ["ng", "serve", "--host", "0.0.0.0", "--poll", "1", "--proxy-config", "proxy.conf.json"]
   backend:
     build: backend
+    volumes:
+      - ./backend:/app
+    environment:
+      - APP_CONFIG=config.DevelopmentConfig
     ports:
       - "5000:5000"
   apimgmt:
     build: apimgmt
     volumes:
-      - /home/tobias/Dokumente/masagin/apimgmt/config:/etc/api-umbrella
-      - /home/tobias/Dokumente/masagin/apimgmt/db:/opt/api-umbrella/var/db
-      - /home/tobias/Dokumente/masagin/apimgmt/log:/opt/api-umbrella/var/log
+      - ./apimgmt/config:/etc/api-umbrella
+      - ./apimgmt/db:/opt/api-umbrella/var/db
+      - ./apimgmt/log:/opt/api-umbrella/var/log
     ports:
       - "443:443"
       - "80:80"
   apimgmt-rest:
     build: apimgmt-rest
     volumes:
-      - /home/tobias/Dokumente/masagin/apimgmt-rest:/app
+      - ./apimgmt-rest:/app
     environment:
       - API_KEY=pRGpAwlNMUtR12bbFiSgHOmlVPiOFczgHgm1tFHz
       - API_ADMIN_KEY=HF5YXVfu44sQ44FRBysy1oZ7F30E7sLvMdDAMuCY
@@ -37,7 +41,7 @@ services:
   marvin:
     build: marvin
     volumes:
-      - /home/tobias/Dokumente/masagin/marvin:/app
+      - ./marvin:/app
     entrypoint: python app.py
     depends_on:
       - apimgmt

@@ -22,7 +22,7 @@ users = [
 class UserFormat(Resource):
     def get(self):
         return jsonify(
-            ["name", "age", "occupation"]
+            [{"key":"name"}, {"key":"age"}, {"key":"occupation"}]
         )
 
 class Users(Resource):

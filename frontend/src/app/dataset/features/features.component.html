@@ -1,0 +1,11 @@
+<mat-list>
+  <mat-list-item *ngFor="let item of data">
+    <mat-checkbox
+      [ngModel]="item.done"
+      [indeterminate]="item.done === null"
+      (ngModelChange)="click(item)"
+      color="primary">
+      {{item.key}}
+    </mat-checkbox>
+  </mat-list-item>
+</mat-list>

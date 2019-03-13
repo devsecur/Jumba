@@ -49,6 +49,9 @@ import {
 import { AppRoutingModule }     from './app-routing.module';
 import { ResultsComponent } from './results/results.component';
 import { DatasetComponent } from './dataset/dataset.component';
+import { FeaturesComponent } from './dataset/features/features.component';
+import { QuestionsComponent } from './dataset/questions/questions.component';
+import { GenerateComponent } from './dataset/generate/generate.component';
 
 @NgModule({
   imports: [
@@ -98,7 +101,10 @@ import { DatasetComponent } from './dataset/dataset.component';
     DashboardComponent,
     MessagesComponent,
     ResultsComponent,
-    DatasetComponent
+    DatasetComponent,
+    FeaturesComponent,
+    QuestionsComponent,
+    GenerateComponent
   ],
   bootstrap: [ AppComponent ]
 })

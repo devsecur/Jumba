@@ -7,6 +7,7 @@
 mat-toolbar {
   z-index: 2;
   position: relative;
+  transition: all .3s ease-in-out;
 }
 
 mat-sidenav-container {
@@ -35,7 +36,8 @@ mat-sidenav {
   animation-duration: 10s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
-  transform: scale(-1, 1)
+  transform: scale(-1, 1);
+  transition: all .3s ease-in-out;
   //filter: invert(100%);
 }
 
@@ -51,7 +53,14 @@ mat-sidenav {
     }
 }
 
+.shrink-toolbar {
+  height: 32px;
+  font-size: 14px;
+}
 
+.shrink-toolbar img {
+  height: 16px !important;
+}
 
 /* Structure */
 .example-container {

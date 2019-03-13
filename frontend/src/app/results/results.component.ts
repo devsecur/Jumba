@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { MatPaginator, MatSort, MatInput } from '@angular/material';
 import { merge, Observable, of as observableOf, fromEvent } from 'rxjs';
 import { debounceTime, distinctUntilChanged, tap, delay } from 'rxjs/operators';
@@ -44,17 +44,13 @@ export class ResultsComponent implements OnInit {
             this.sort.active, this.sort.direction, this.paginator.pageIndex, this.input.nativeElement.value,);
         }),
         map(data => {
-          // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
-          console.log(data)
           this.resultsLength = data.recordsTotal;
           return data.data;
         }),
         catchError(() => {
           this.isLoadingResults = false;
-          console.log("bla")
-          // Catch if the GitHub API has reached its rate limit. Return empty data.
           this.isRateLimitReached = true;
           return observableOf([]);
         })
@@ -69,21 +65,19 @@ export class ResultsComponent implements OnInit {
             this.sort.active, this.sort.direction, this.paginator.pageIndex, this.input.nativeElement.value,);
         }),
         map(data => {
-          // Flip flag to show that loading has finished.
           this.isLoadingResults = false;
           this.isRateLimitReached = false;
-          console.log(data)
           this.resultsLength = data.recordsTotal;
           return data.data;
         }),
         catchError(() => {
           this.isLoadingResults = false;
-          console.log("bla")
-          // Catch if the GitHub API has reached its rate limit. Return empty data.
           this.isRateLimitReached = true;
           return observableOf([]);
         })
-      ).subscribe(data => this.data = data);
+      ).subscribe(data =>
+        this.data = data
+      );
   }
 
   applyFilter(searchterm) {
@@ -91,16 +85,6 @@ export class ResultsComponent implements OnInit {
   }
 }
 
-export interface GithubApi {
-  items: any[];
-}
-
-export interface GithubIssue {
-  dataset_name: string;
-  number_of_records: string;
-}
-
-/** An example database that the data source uses to retrieve data for the table. */
 export class Datasource {
   constructor(private http: HttpClient) { }
 
@@ -109,6 +93,6 @@ export class Datasource {
     const requestUrl =
       `${href}?q=repo:angular/material2&sort=${sort}&order=${order}&page=${page}&limit=10&filter=${filter}`;
 
-    return this.http.get<GithubApi>(requestUrl);
+    return this.http.get<any>(requestUrl);
   }
 }
